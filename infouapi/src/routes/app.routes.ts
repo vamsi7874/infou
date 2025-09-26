@@ -5,7 +5,9 @@ const Router = express.Router()
 Router.get("/",()=>"working well on this method ");
 
 const methoNameToControllerMap : any = {
-    home : "../controller/home.controller.ts"
+    home : "../controller/home.controller.ts",
+    weather : "../datacollection/weather.collection.api.ts",
+    auth  : "../controller/auth.controller.ts"
 }
 
 const commonMethodCall = async (req : any,res : any)=>{
