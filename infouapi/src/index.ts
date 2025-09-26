@@ -4,6 +4,7 @@ const appRoutes = require("./routes/app.routes");
 
 
 import * as dotenv from 'dotenv';
+const cors = require('cors');
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const Router = express.Router();
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 const port = process.env.PORT || 3000;
 const connection_string = process.env.MONGO_STRING_CONNECTION;
 const dbName = process.env.DB;

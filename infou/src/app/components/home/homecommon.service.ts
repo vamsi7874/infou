@@ -1,22 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomecommonService {
 
-  constructor(private http : HttpClient) { 
+  signUpPayload = signal<any>(null);
+
+   private http = inject(HttpClient); 
+
+  constructor() { 
 
   }
 
-  onSignup(email : string,password : string){
-    if(!email || !password || (email === password)){
-      return
-    }
+ 
 
-    
+ onLogin(){
+  
+ }
 
-
-  }
+ 
 }
