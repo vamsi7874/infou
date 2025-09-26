@@ -1,9 +1,13 @@
 import express from 'express';
 import {initilizeDb} from "./common/mongo"
+const appRoutes = require("./routes/app.routes");
+
 
 import * as dotenv from 'dotenv';
 
 dotenv.config();
+
+const Router = express.Router();
 
 const app = express();
 app.use(express.json());
@@ -14,6 +18,8 @@ const dbName = process.env.DB;
 app.get('/', (req, res) => {
     res.send('<h1 style="color:red;">Info You Backend!</h1>');
 });
+
+app.use("/app",appRoutes);
 
 const startServer = async () => {
     try {
@@ -31,3 +37,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+
