@@ -50,15 +50,28 @@ export const findAll = async (collectionName: string): Promise<any[]> => {
     }
 };
 
-
 export const insertOne = async (collectionName: string, insertObj: any): Promise<any> => {
     try {
         const db = await getDb();
+        await createCollection(collectionName, db); // Await the creation
         return await db.collection(collectionName).insertOne(insertObj);
     } catch (err) {
         console.error(`Error inserting one document into '${collectionName}':`, err);
         return null;
     }
 };
+
+
+const createCollection = async (collectionName: string, db: any): Promise<void> => {
+    const collections = await db.listCollections({ name: collectionName }).toArray();
+    if (collections.length === 0) {
+        await db.createCollection(collectionName);
+        console.log(`Collection '${collectionName}' created successfully.`);
+    }
+};
+
+
+
+
 
 

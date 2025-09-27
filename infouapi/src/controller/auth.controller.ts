@@ -16,9 +16,9 @@ exports.validateLogin = async (req: any, res: any) => {
 
 exports.signUp = async (req: any, res: any) => {
   try {
-    let r="data"
+          console.log(req?.body,"response");
     if (req.body) {
-      let email = req?.body?.mail;
+      let email = req?.body?. email;
       let mobile = req?.body?.mobile;
       let password = req?.body?.password;
       let access_level = "admin";
@@ -29,6 +29,8 @@ exports.signUp = async (req: any, res: any) => {
     
       }
          const res =  await insertOne(collection, { email, mobile, password, access_level });
+         console.log(res,"response");
+         
 
          return res;
     }

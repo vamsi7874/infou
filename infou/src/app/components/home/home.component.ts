@@ -3,18 +3,21 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
 import { HomecommonService } from './homecommon.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { routes } from '../../app.routes';
+import { Router } from '@angular/router';
+import { SignedupscrrenComponent } from '../signedupscrren/signedupscrren.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,SignedupscrrenComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
   // homeService = inject(HomecommonService);
-constructor(private http : HttpClient){
+constructor(private http : HttpClient,private router : Router){
 
 }
 
@@ -22,14 +25,20 @@ constructor(private http : HttpClient){
 
   email = signal('');
   password = signal('');
+  isSignedUp = signal(false);
 
   // signUppayload = this.homeService.signUpPayload
 
   onSubmit() {
     // this.signUppayload.set({email : this.email,password : this.password});
 
-    this.onSignup({email : this.email,password : this.password,methodName : "auth-signUp",mobile : '9000900090' }).subscribe((res)=>{
-      console.log(res,"responseAdded");
+    this.onSignup({email : this.email(),password : this.password(),methodName : "auth-signUp",mobile : '9000900090' }).subscribe((res : any)=>{
+      if(res?.acknowledged){
+        this.isSignedUp.set(true);
+         
+        
+
+      }
       
     })
   }
