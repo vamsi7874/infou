@@ -25,7 +25,7 @@ constructor(private http : HttpClient,private router : Router){
 
   email = signal('');
   password = signal('');
-  isSignedUp = signal(false);
+  isSignedUp = signal(true);
 
   // signUppayload = this.homeService.signUpPayload
 

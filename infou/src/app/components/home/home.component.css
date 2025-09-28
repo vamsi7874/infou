@@ -12,8 +12,6 @@
   border: none;
 }
 
-
-
 /* @media screen and (max-width: 768px) {
   .bg-image {
     background-position: center top; 
@@ -22,16 +20,26 @@
   } */
 /* } */
 
-@media screen and (max-width : 768px) {
-  .card-body{
+
+@media screen and (max-width: 768px) {
+  .card-body {
     background-color: transparent;
   }
-  .bg-image {
+ 
+}
+
+.bg-image {
   background-image: url("../../../assests/mainlogo.jpeg");
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
-  
+
+@media (max-width: 991.98px) {
+  .form-section {
+    background-image: url("../../../assests/mainlogo.jpeg");
+    background-size: cover;
+    background-position: center;
+  }
 }
 

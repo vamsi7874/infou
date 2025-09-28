@@ -1,28 +1,13 @@
-@if(!isSignedUp()){
-
-<div
-  class="container-fluid vh-100 d-flex justify-content-center align-items-center"
->
+@if (!isSignedUp()) {
+<div class="container-fluid vh-100">
   <div class="row w-100 h-100">
-    <!-- Content for image shown on login or signup -->
-    <div
-      class="d-none d-lg-block col-lg-8 bg-image"
-    >
-      <img 
-    src="../../../assests/mainlogo.jpeg" 
-    alt="logo" 
-    class="img-fluid" 
-    style="width: 100%; height: auto;" 
-  />
-    </div>
+    <div class="d-none w-50 d-lg-block col-lg-8 bg-image"></div>
 
-    <!-- Content for form -->
-    <div
-      class="col-12 col-lg-4 bg-image d-flex justify-content-center align-items-center bg-light p-5"
-    >
-      <div class="card p-4 shadow-lg bg-white bg-opacity-10 rounded-3 w-100">
+    <!-- Form Section -->
+    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section">
+      <div class="card p-4 shadow-lg bg-white rounded-3 w-100" style="max-width: 400px;">
         <div class="card-body">
-          <h1 class="card-title text-center text-4xl fw-bold mb-4">Sign Up</h1>
+          <h1 class="card-title text-center fw-bold mb-4">Sign Up</h1>
           <form (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
@@ -61,7 +46,6 @@
     </div>
   </div>
 </div>
-
-}@else{
- <app-signedupscrren></app-signedupscrren>
+} @else {
+<app-signedupscrren></app-signedupscrren>
 }
