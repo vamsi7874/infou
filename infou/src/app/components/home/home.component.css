@@ -43,3 +43,29 @@
   }
 }
 
+.bg-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Ensure body has enough padding for navbar */
+body {
+  padding-top: 56px; /* Default Bootstrap navbar height */
+}
+
+/* Adjust for different screen sizes */
+@media (max-width: 575.98px) {
+  body {
+    padding-top: 56px; /* Same for mobile */
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.navbar {
+  z-index: 1030; 
+}
+

@@ -1,13 +1,64 @@
-@if (!isSignedUp()) {
-<div class="container-fluid vh-100">
-  <div class="row w-100 h-100">
-    <div class="d-none w-50 d-lg-block col-lg-8 bg-image"></div>
 
-    <!-- Form Section -->
-    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section">
-      <div class="card p-4 shadow-lg bg-white rounded-3 w-100" style="max-width: 400px;">
-        <div class="card-body">
-          <h1 class="card-title text-center fw-bold mb-4">Sign Up</h1>
+
+
+<!-- navbar.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" routerLink="/">
+      <i class="fas fa-rocket me-2"></i>MyApp
+    </a>
+    
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      (click)="toggleNavbar()"
+      [attr.aria-expanded]="isNavbarExpanded"
+      aria-controls="navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div 
+      class="navbar-collapse" 
+      [class.collapse]="!isNavbarExpanded"
+      [class.show]="isNavbarExpanded"
+      id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" (click)="closeNavbar()">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavbar()">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/services" routerLinkActive="active" (click)="closeNavbar()">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact" routerLinkActive="active" (click)="closeNavbar()">Contact</a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <button class="btn btn-outline-primary" type="button" (click)="closeNavbar()">Login</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  
+</nav>
+
+<!-- Keep your navbar as is -->
+
+@if (!isSignedUp()) {
+<!-- Wrapper with margin-top -->
+<div class="mt-4 mt-lg-0"> <!-- Extra margin on mobile, none on large screens -->
+  <div class="container-fluid min-vh-100">
+    <div class="row h-100">
+      <div class="d-none d-lg-block col-lg-8 bg-image"></div>
+
+      <!-- Form Section -->
+      <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section">
+        <div class="card p-4 shadow-lg bg-white rounded-3 w-100" style="max-width: 400px;">
+          <div class="card-body">
+            <h1 class="card-title text-center fw-bold mb-4">Sign Up</h1>
           <form (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
@@ -40,7 +91,9 @@
                 Sign Up
               </button>
             </div>
-          </form>
+    
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -49,3 +102,6 @@
 } @else {
 <app-signedupscrren></app-signedupscrren>
 }
+
+
+

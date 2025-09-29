@@ -27,7 +27,18 @@ constructor(private http : HttpClient,private router : Router){
   password = signal('');
   isSignedUp = signal(true);
 
+
   // signUppayload = this.homeService.signUpPayload
+
+  isNavbarExpanded = false;
+
+  toggleNavbar() {
+    this.isNavbarExpanded = !this.isNavbarExpanded;
+  }
+
+  closeNavbar() {
+    this.isNavbarExpanded = false;
+  }
 
   onSubmit() {
     // this.signUppayload.set({email : this.email,password : this.password});
