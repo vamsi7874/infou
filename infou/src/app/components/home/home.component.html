@@ -23,18 +23,14 @@
       [class.show]="isNavbarExpanded"
       id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" (click)="closeNavbar()">Home</a>
+        @for(link of headerOptions();track link.path){
+           <li class="nav-item">
+          <a class="nav-link" routerLink="link.path" routerLinkActive="link.isActive" (click)="closeNavbar()">{{link?.name}}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" routerLinkActive="active" (click)="closeNavbar()">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/services" routerLinkActive="active" (click)="closeNavbar()">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  routerLinkActive="active" (click)="routeToPath('contacts')" routerLink="/contacts">Contact</a>
-        </li>
+
+        }
+       
+      
         <li class="nav-item ms-lg-3">
           <button class="btn btn-outline-primary" type="button" (click)="closeNavbar()">Login</button>
         </li>

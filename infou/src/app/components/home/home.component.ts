@@ -21,6 +21,16 @@ constructor(private http : HttpClient,private router : Router){
 
 }
 
+headerOptions = signal<any[]>([{
+  path : "/",isActive : true,name : "Home"
+},{
+  path : "/contacts",isActive : false,name : "Contacts"
+},{
+  path : "/about",isActive : false, name : "About"
+},{
+  path : "/services", isActive : false,name : "Services"
+}])
+
 
 
   email = signal('');
