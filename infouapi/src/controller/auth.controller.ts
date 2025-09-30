@@ -1,5 +1,16 @@
 import { insertOne, findOne } from "../common/mongo";
 
+class RES {
+  message : string = ''
+  data : any = ''
+  constructor(message : any,data : any){
+    this.message = message
+    this.data = data
+
+
+  }
+}
+
 exports.validateLogin = async (req: any, res: any) => {
   try {
     let userObj = await findOne("users", "email", req?.body?.email);
@@ -16,7 +27,6 @@ exports.validateLogin = async (req: any, res: any) => {
 
 exports.signUp = async (req: any, res: any) => {
   try {
-          console.log(req?.body,"response");
     if (req.body) {
       let email = req?.body?. email;
       let mobile = req?.body?.mobile;
@@ -25,18 +35,19 @@ exports.signUp = async (req: any, res: any) => {
       let collection = "users";
 
       if (!email || !mobile || !password) {
-        return
+        return `Required :  ${email ? '' : 'email'} ${mobile ? '' : ',mobile'} ${password ? '' : ',password'}`
     
       }
          const res =  await insertOne(collection, { email, mobile, password, access_level });
-         console.log(res,"response");
+         if(res){
+          return new RES("Inserted Sucessfully",res);
+         }
          
 
          return res;
     }
   } catch (e: any) {
-    console.log(e, "error occur");
 
-    return e?.data;
+    return new RES( "Missing Required Fileds For user Creation",  e?.data);
   }
 };

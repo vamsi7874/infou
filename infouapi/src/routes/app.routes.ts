@@ -30,8 +30,6 @@ const commonMethodCall = async (req : any,res : any)=>{
 
         if(CNTRL){
             //calling real api from here
-            console.log(method,CNTRL,"methoddd");
-            
            const responseData =  await CNTRL[method](req);
            return res.send(responseData);
         }
@@ -41,5 +39,7 @@ const commonMethodCall = async (req : any,res : any)=>{
 
 //needs to implement auth middleware authenticate
 Router.post("/commCall",commonMethodCall);
+Router.post("/signup",authenticate,commonMethodCall);
+Router.post("/login",authenticate,commonMethodCall);
 
 module.exports = Router;
