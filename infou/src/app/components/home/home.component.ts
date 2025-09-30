@@ -25,7 +25,7 @@ constructor(private http : HttpClient,private router : Router){
 
   email = signal('');
   password = signal('');
-  isSignedUp = signal(true);
+  isSignedUp = signal(false);
 
 
   // signUppayload = this.homeService.signUpPayload
@@ -44,12 +44,10 @@ constructor(private http : HttpClient,private router : Router){
     // this.signUppayload.set({email : this.email,password : this.password});
 
     this.onSignup({email : this.email(),password : this.password(),methodName : "auth-signUp",mobile : '9000900090' }).subscribe((res : any)=>{
-      if(res?.acknowledged){
-        this.isSignedUp.set(true);
-         
-        
-
+      if(res?.status == 401){
+        this.isSignedUp.set(false);
       }
+      this.isSignedUp.set(true);
       
     })
   }
@@ -57,6 +55,14 @@ constructor(private http : HttpClient,private router : Router){
   onSignup(data : any){
 
   return this.http.post('http://localhost:3000/app/commCall',data).pipe(res=>res);
+
+ }
+
+ routeToPath(path  :string){
+  this.router.navigate([path]).then(()=>{
+    console.log(this.router?.events,"routeEvents");
+    
+  })
 
  }
 

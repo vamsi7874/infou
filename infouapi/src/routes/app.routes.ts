@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { authenticate } from '../common/auth';
 
 const Router = express.Router()
 
@@ -9,6 +10,7 @@ const methoNameToControllerMap : any = {
     weather : "../datacollection/weather.collection.api.ts",
     auth  : "../controller/auth.controller.ts"
 }
+
 
 const commonMethodCall = async (req : any,res : any)=>{
 
@@ -37,6 +39,7 @@ const commonMethodCall = async (req : any,res : any)=>{
 
 }
 
+//needs to implement auth middleware authenticate
 Router.post("/commCall",commonMethodCall);
 
 module.exports = Router;
