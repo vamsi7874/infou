@@ -1,0 +1,17 @@
+<div class="p-1 m-1 text-capitalize">
+    <div class="card p-1 d-flex justify-content-center">
+        <span>App Version</span> : <span>{{appInfo()?.version}}</span>
+        <span>Deployed At</span> : <span>{{appInfo()?.deployedAt}}</span>
+         <span>Future Deployment Date</span> : <span>{{appInfo()?.nxtDeploymentDate}}</span>
+        @if(appInfo().isScheduleEnable){
+            <div>
+                <button class="btn btn-sm btn-info" title="Not Ready needs to schedule it ..">Schedule Deployment</button>
+
+            </div>
+            
+
+        }
+
+    </div>
+
+</div>

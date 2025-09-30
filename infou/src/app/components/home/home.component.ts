@@ -4,13 +4,13 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HomecommonService } from './homecommon.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { routes } from '../../app.routes';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SignedupscrrenComponent } from '../signedupscrren/signedupscrren.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,SignedupscrrenComponent],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,SignedupscrrenComponent,RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -21,9 +21,11 @@ constructor(private http : HttpClient,private router : Router){
 
 }
 
-headerOptions = signal<any[]>([{
-  path : "/",isActive : true,name : "Home"
-},{
+headerOptions = signal<any[]>([
+  {
+  path : "/home",isActive : false,name : "Home"
+},
+{
   path : "/contacts",isActive : false,name : "Contacts"
 },{
   path : "/about",isActive : false, name : "About"
@@ -58,6 +60,7 @@ headerOptions = signal<any[]>([{
         this.isSignedUp.set(false);
       }
       this.isSignedUp.set(true);
+      this.routeToPath({path : "/home"})
       
     })
   }
@@ -68,12 +71,15 @@ headerOptions = signal<any[]>([{
 
  }
 
- routeToPath(path  :string){
-  this.router.navigate([path]).then(()=>{
-    console.log(this.router?.events,"routeEvents");
-    
+ routeToPath(link  :any){
+  this.headerOptions().forEach((ele)=>{
+    if(ele?.path == link?.path){
+      ele.isActive = true
+    }
   })
-
+  this.router.navigate([link?.path]).then(()=>{
+    this.isSignedUp.set(true);
+  })
  }
 
 }

@@ -4,7 +4,7 @@
 <!-- navbar.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container">
-    <a class="navbar-brand fw-bold text-primary font-awesome" routerLink="/">
+    <a class="navbar-brand fw-bold text-primary font-awesome" routerLink="/home" (click)="routeToPath({path:'/home'})">
       <i class="fas fa-rocket me-2"></i>infoU
     </a>
     
@@ -25,15 +25,13 @@
       <ul class="navbar-nav ms-auto">
         @for(link of headerOptions();track link.path){
            <li class="nav-item">
-          <a class="nav-link" routerLink="link.path" routerLinkActive="link.isActive" (click)="closeNavbar()">{{link?.name}}</a>
+          <a class="nav-link" routerLink="link.path" [class.active]="link.isActive" routerLinkActive="link.isActive" (click)="routeToPath(link)">{{link?.name}}</a>
         </li>
 
         }
-       
-      
-        <li class="nav-item ms-lg-3">
+        <!-- <li class="nav-item ms-lg-3">
           <button class="btn btn-outline-primary" type="button" (click)="closeNavbar()">Login</button>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -48,7 +46,9 @@
 <div class="mt-4 mt-lg-0"> <!-- Extra margin on mobile, none on large screens -->
   <div class="container-fluid min-vh-100">
     <div class="row h-100">
-      <div class="d-none d-lg-block col-lg-8 bg-image"></div>
+      <div class="d-none d-lg-block col-lg-8 bg-image">
+        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.toureiffel.paris%2Fen&psig=AOvVaw3S7jzygeyxshKNET0wU8a6&ust=1759336835357000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCKDa1cv2gJADFQAAAAAdAAAAABAo" />
+      </div>
 
       <!-- Form Section -->
       <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section">
@@ -95,9 +95,12 @@
     </div>
   </div>
 </div>
-} @else {
-<app-signedupscrren></app-signedupscrren>
-}
+} 
+
+<div class="p-1 m-1">
+  <router-outlet></router-outlet>
+
+</div>
 
 
 
