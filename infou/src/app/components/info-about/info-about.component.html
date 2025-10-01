@@ -2,6 +2,7 @@
     <div class="card p-1 d-flex justify-content-center">
         <span>App Version</span> : <span>{{appInfo()?.version}}</span>
         <span>Deployed At</span> : <span>{{appInfo()?.deployedAt}}</span>
+          <span>Content Management</span> : <span>{{appInfo()?.cms}}</span>
          <span>Future Deployment Date</span> : <span>{{appInfo()?.nxtDeploymentDate}}</span>
         @if(appInfo().isScheduleEnable){
             <div>

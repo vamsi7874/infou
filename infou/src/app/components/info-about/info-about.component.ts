@@ -16,7 +16,8 @@ export class InfoAboutComponent {
     version : environtment.version,
     deployedAt : 'Firebase',
     nxtDeploymentDate : new Date().getDate() + 1,
-    isScheduleEnable : true 
+    isScheduleEnable : true,
+    cms : "Strapi Open Source" 
 
   })
 
