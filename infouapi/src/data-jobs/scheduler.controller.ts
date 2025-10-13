@@ -5,7 +5,9 @@ import { insertOne } from '../common/mongo';
 
 const mapToCron: Record<string, string> = {
   weather: "weather-getWeatherData",
-  finance : "finance-getGSTData"
+  finance : "finance-getGSTData",
+  horticrops : "finance-getHortiCropData",
+  disasterfunds  :"finance-getDisasterData"
 };
 
 
@@ -13,9 +15,7 @@ const mapToCron: Record<string, string> = {
 //work in background and strore the logs in db.needs to build ui for cron logs .
 
 export const startScheduler = async (req: any) => {
-    console.log(req?.body?.key,"requ");
-    
-        const path: string = "http://localhost:3000/app/commCall";
+    const path: string = `${process.env.SELF_CALL}/app/commCall`;
     const key = req?.body?.key;
   try {
     const jobpayload = {

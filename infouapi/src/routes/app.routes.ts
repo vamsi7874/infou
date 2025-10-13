@@ -10,7 +10,7 @@ const methoNameToControllerMap : any = {
     weather : "../datacollection/weather.collection.api.ts",
     auth  : "../controller/auth.controller.ts",
     finance : "../datacollection/finance.collection.api.ts",
-    datajobs : "../data-jobs/scheduler.ts",
+    datajobs : "../data-jobs/scheduler.controller.ts",
     logs : "../logs/logs.ts"
 }
 
@@ -18,6 +18,8 @@ const methoNameToControllerMap : any = {
 const commonMethodCall = async (req : any,res : any)=>{
 
     let methodName = req.body.methodName;
+
+    
 
     if(!methodName || methodName == ''){
         return "Required Method Name"
