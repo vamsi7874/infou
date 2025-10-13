@@ -13,10 +13,9 @@ export class ContactinfouComponent {
 
   }
 
-  contactInfo : any ={
-    email : "vamsi@mail.com",
-    mobile : "9492048237",
+  schedulerOpts = signal([ {name : "Weather",icon : '<i class="fa-solid fa-cloud"></i>'} , {name : "Finanace",icon : '<i class="fa-solid fa-coins"></i>'}
+  ])
 
-  }
+ 
 
 }

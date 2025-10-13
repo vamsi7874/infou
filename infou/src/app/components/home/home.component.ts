@@ -26,7 +26,7 @@ headerOptions = signal<any[]>([
   path : "/home",isActive : false,name : "Home"
 },
 {
-  path : "/contacts",isActive : false,name : "Contacts"
+  path : "/scheduler",isActive : false,name : "Scheduler"
 },{
   path : "/about",isActive : false, name : "About"
 },{

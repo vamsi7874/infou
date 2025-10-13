@@ -1,24 +1,21 @@
-<div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Contact Information</h5>
-      <div class="contact-info">
-          <div class="contact-item d-flex justify-content-between py-2">
-            <strong class="text-capitalize">Email </strong>
-            <span>{{ contactInfo?.email }}</span>
-          </div>
-      </div>
-       <div class="contact-info">
-          <div class="contact-item d-flex justify-content-between py-2">
-            <strong class="text-capitalize">Mobile </strong>
-            <span>{{ contactInfo?.mobile }}</span>
-          </div>
-      </div>
-    </div>
+<div class="card">
+  <div class="card-title">Schedule Cron Job To Fetch Real Time Data Peridocally..</div>
+  <div class="card-body">
+
+    @for(ele of schedulerOpts();track ele){
+      <span class="row p-1 border-bottom-0">
+        <span class="col-6 ">Sync <b class="badge text-bg-secondary">{{ele?.name}} </b>Data</span>
+        <span class="col-6"><button class="btn btn-primary"  [innerHTML]="ele.name + ' ' + ele.icon"></button></span>
+
+      </span>
+
+    }
+
+
   </div>
+
 </div>
 
 <div>
-    <h5>FAQ</h5>
-    <p>Pls check the questions below which may answer you query.still have a question please ping us via mail</p>
+  <h4>Needs to Build Cron Type Jobs Running data can be fetched from db cron-logs</h4>
 </div>

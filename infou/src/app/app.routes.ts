@@ -6,7 +6,7 @@ import { SignedupscrrenComponent } from './components/signedupscrren/signedupscr
 import { InfoAboutComponent } from './components/info-about/info-about.component';
 
 export const routes: Routes = [
-    {path:"contacts",component:ContactinfouComponent},{path : "services" ,component : ServicesComponent},
+    {path:"scheduler",component:ContactinfouComponent},{path : "services" ,component : ServicesComponent},
     {path : "home" ,component : SignedupscrrenComponent},{path : "about" ,component : InfoAboutComponent}
     
 ];

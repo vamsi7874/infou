@@ -43,7 +43,7 @@ export const findOne = async (collectionName: string, key: string, value: any): 
 export const findAll = async (collectionName: string): Promise<any[]> => {
     try {
         const db = await getDb();
-        return await db.collection(collectionName).find({}).toArray();
+        return await db.collection(collectionName).find({},{projection :{_id : 0}}).toArray();
     } catch (err) {
         console.error(`Error finding all documents in '${collectionName}':`, err);
         return [];

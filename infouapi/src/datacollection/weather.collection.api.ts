@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { insertOne } from '../common/mongo';
+import moment from 'moment';
 
 
 const indiaLatLan = {
@@ -20,7 +21,7 @@ exports.getWeatherData =async(req : any,res : any)=>{
     const construct_uri = `${api_to_connect}?latitude=${latitude}&longitude=${longitude}&daily=${daily}&hourly=${hourly}&current=${current}&timezone=${timezone}&forecast_days=${forecast_days}`
     try {
         const response = await axios.get(construct_uri);
-        const weatherData = await insertOne("weather",response?.data);
+        const weatherData = await insertOne("weather",{...response?.data,date : moment().unix()});
         return weatherData?.ackknowledged ?? false;
         
     }
