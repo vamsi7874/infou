@@ -13,8 +13,8 @@ export class ContactinfouComponent {
 
   }
 
-  schedulerOpts = signal([ {name : "Weather",icon : '<i class="fa-solid fa-cloud"></i>'} , {name : "Finanace",icon : '<i class="fa-solid fa-coins"></i>'}
-  ])
+  schedulerOpts = signal([ {name : "Weather",icon : '<i class="fa-solid fa-cloud"></i>'} , {name : "Finanace",icon : '<i class="fa-solid fa-coins"></i>'},
+ {name : "Disaster Funds",icon:""},{name : "Horti Cultural Crops" ,icon : ""} ])
 
  
 
