@@ -467,6 +467,65 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCropCrop extends Struct.CollectionTypeSchema {
+  collectionName: 'crops';
+  info: {
+    displayName: 'crop';
+    pluralName: 'crops';
+    singularName: 'crop';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    crop_ud: Schema.Attribute.UID<'name'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::crop.crop'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.Text;
+    price_this_year: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    why_majorly_used: Schema.Attribute.RichText;
+  };
+}
+
+export interface ApiInfouuserInfouuser extends Struct.CollectionTypeSchema {
+  collectionName: 'infouusers';
+  info: {
+    displayName: 'infouusers';
+    pluralName: 'infouusers';
+    singularName: 'infouuser';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dispimg: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    email: Schema.Attribute.Email;
+    fullname: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::infouuser.infouuser'
+    > &
+      Schema.Attribute.Private;
+    mobile: Schema.Attribute.BigInteger;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -978,6 +1037,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::crop.crop': ApiCropCrop;
+      'api::infouuser.infouuser': ApiInfouuserInfouuser;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
