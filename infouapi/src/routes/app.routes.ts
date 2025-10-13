@@ -9,7 +9,8 @@ const methoNameToControllerMap : any = {
     home : "../controller/home.controller.ts",
     weather : "../datacollection/weather.collection.api.ts",
     auth  : "../controller/auth.controller.ts",
-    finance : "../datacollection/finance.collection.api.ts"
+    finance : "../datacollection/finance.collection.api.ts",
+    datajobs : "../data-jobs/scheduler.ts"
 }
 
 

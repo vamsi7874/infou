@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { transformDailyWeather, transformHourlyData } from './transformdata';
+
+import { insertOne } from '../common/mongo';
+
 
 const indiaLatLan = {
   "lat": 20.5937,
@@ -16,10 +18,11 @@ exports.getWeatherData =async(req : any,res : any)=>{
     const timezone = "auto"
     const forecast_days = 3; // needs to change this later
     const construct_uri = `${api_to_connect}?latitude=${latitude}&longitude=${longitude}&daily=${daily}&hourly=${hourly}&current=${current}&timezone=${timezone}&forecast_days=${forecast_days}`
-    let weather_data
     try {
-        const response = await axios.get(construct_uri)
-        return response?.data
+        const response = await axios.get(construct_uri);
+        const weatherData = await insertOne("weather",response?.data);
+        return weatherData?.ackknowledged ?? false;
+        
     }
     catch(e){
         return  "error while fetching";
