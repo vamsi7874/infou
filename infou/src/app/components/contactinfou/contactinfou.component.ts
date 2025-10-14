@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError } from 'rxjs';
 
 @Component({
@@ -9,9 +9,10 @@ import { catchError } from 'rxjs';
   templateUrl: './contactinfou.component.html',
   styleUrl: './contactinfou.component.css'
 })
-export class ContactinfouComponent {
+export class ContactinfouComponent implements OnInit {
 
   http = inject(HttpClient);
+  cronLogs = signal<any[]>([]);
 
   constructor(){
 
@@ -21,6 +22,11 @@ export class ContactinfouComponent {
  {name : "Disaster Funds",key : "disasterfunds",icon:'<i class="fa-solid fa-wheat-awn-circle-exclamation"></i>'},{name : "Horti Cultural Crops" ,key : "horticrops",icon : '<i class="fa-solid fa-building-wheat"></i>'} ])
 
  
+ngOnInit(): void {
+    this.getCronLogs();
+}
+
+
  onClickScheduler(key : string | undefined){
 
   const uri = 'http://localhost:3000/app/commCall'
@@ -34,4 +40,22 @@ export class ContactinfouComponent {
   })
 
 } 
+
+getCronLogs (){
+
+   const uri = 'http://localhost:3000/app/commCall'
+  const payload = {
+    methodName : "logs-getLogsData"
+  }
+
+
+  this.http.post(uri,payload).subscribe((res : any)=>{
+   if(res?.length){
+    //can implement in back end also 
+    const refreshed = res?.filter((ele : any)=>ele?.cron_type != null)
+    this.cronLogs.set(refreshed);
+   }
+    
+  })
+}
 }
