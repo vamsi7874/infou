@@ -43,8 +43,8 @@ const commonMethodCall = async (req : any,res : any)=>{
 }
 
 //needs to implement auth middleware authenticate
-Router.post("/commCall",commonMethodCall);
-Router.post("/signup",authenticate,commonMethodCall);
-Router.post("/login",authenticate,commonMethodCall);
+Router.post("/signup", commonMethodCall);  
+Router.post("/login", commonMethodCall);   
+Router.post("/commCall", authenticate, commonMethodCall); 
 
 module.exports = Router;

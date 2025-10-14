@@ -12,11 +12,12 @@ import { SignedupscrrenComponent } from '../signedupscrren/signedupscrren.compon
   standalone: true,
   imports: [CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,SignedupscrrenComponent,RouterModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  providers : [HomecommonService]
 })
 export class HomeComponent {
 
-  // homeService = inject(HomecommonService);
+  homeService = inject(HomecommonService);
 constructor(private http : HttpClient,private router : Router){
 
 }
@@ -37,12 +38,16 @@ headerOptions = signal<any[]>([
 
   email = signal('');
   password = signal('');
-  isSignedUp = signal(false);
+
 
 
   // signUppayload = this.homeService.signUpPayload
 
   isNavbarExpanded = false;
+
+  get isSignedUp() {
+  return this.homeService.isLoggedIn();
+}
 
   toggleNavbar() {
     this.isNavbarExpanded = !this.isNavbarExpanded;
@@ -53,21 +58,24 @@ headerOptions = signal<any[]>([
   }
 
   onSubmit() {
-    // this.signUppayload.set({email : this.email,password : this.password});
-
-    this.onSignup({email : this.email(),password : this.password(),methodName : "auth-signUp",mobile : '9000900090' }).subscribe((res : any)=>{
-      if(res?.status == 401){
-        this.isSignedUp.set(false);
-      }
-      this.isSignedUp.set(true);
-      this.routeToPath({path : "/home"})
-      
-    })
+   
   }
 
-  onSignup(data : any){
+  onSignup(){
 
-  return this.http.post('http://localhost:3000/app/commCall',data).pipe(res=>res);
+  this.homeService.signup(this.email(),this.password()).subscribe((res)=>{
+      console.log(res,"response");
+      
+    })
+
+ }
+
+   onLogin(data : any){
+
+  this.homeService.login(this.email(),this.password()).subscribe((res)=>{
+      console.log(res,"response");
+      
+    })
 
  }
 
@@ -78,7 +86,7 @@ headerOptions = signal<any[]>([
     }
   })
   this.router.navigate([link?.path]).then(()=>{
-    this.isSignedUp.set(true);
+    // this.isSignedUp.set(true);
   })
  }
 

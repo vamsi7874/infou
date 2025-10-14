@@ -1,5 +1,8 @@
 import express from 'express';
 import {initilizeDb} from "./common/mongo"
+import cookieParser from 'cookie-parser';
+
+
 const appRoutes = require("./routes/app.routes");
 
 
@@ -11,6 +14,7 @@ dotenv.config();
 const Router = express.Router();
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT || 3000;
