@@ -4,8 +4,8 @@
 
     @for(ele of schedulerOpts();track ele){
       <span class="row p-1 border-bottom-0">
-        <span class="col-6 ">Sync <b class="badge text-bg-secondary">{{ele?.name}} </b>Data</span>
-        <span class="col-6"><button class="btn btn-primary"  [innerHTML]="ele.name + ' ' + ele.icon"></button></span>
+        <span class="col-6 ">Sync <b class="badge badge-sm  text-bg-secondary">{{ele?.name}} </b>Data</span>
+        <span class="col-6"><button class="btn btn-sm btn-primary" (click)="onClickScheduler(ele?.key)"  [innerHTML]="ele.name + ' ' + ele.icon"></button></span>
 
       </span>
 
