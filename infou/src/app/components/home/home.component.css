@@ -12,13 +12,6 @@
   border: none;
 }
 
-/* @media screen and (max-width: 768px) {
-  .bg-image {
-    background-position: center top; 
-    
-  
-  } */
-/* } */
 
 
 @media screen and (max-width: 768px) {
@@ -72,5 +65,11 @@ body {
 
 .navbar {
   z-index: 1030; 
+}
+
+@media (min-width: 576px) { /* Bootstrap's 'sm' breakpoint */
+  .bg-transparent-sm {
+    background-color: transparent !important;
+  }
 }
 

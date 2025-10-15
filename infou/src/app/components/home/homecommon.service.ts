@@ -30,6 +30,8 @@ export class HomecommonService {
   signup(email: string, password: string) {
     return this.http.post<any>(this.url + 'signup', { email, password, methodName: 'auth-signUp' }).pipe(
       tap((res) => {
+        console.log(res,"response");
+        
         if (res.token) {
           localStorage.setItem('token', res.token);
         }

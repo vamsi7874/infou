@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
+import { FormControlName, FormGroup, FormsModule,ReactiveFormsModule } from '@angular/forms'; 
 import { HomecommonService } from './homecommon.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { routes } from '../../app.routes';
@@ -41,6 +41,8 @@ headerOptions = signal<any[]>([
 
 
 
+
+
   // signUppayload = this.homeService.signUpPayload
 
   isNavbarExpanded = false;
@@ -57,23 +59,26 @@ headerOptions = signal<any[]>([
     this.isNavbarExpanded = false;
   }
 
-  onSubmit() {
+  check() {
+    this.showLoginScreen.set(true);
    
   }
+
+  showLoginScreen = signal(false)
 
   onSignup(){
 
   this.homeService.signup(this.email(),this.password()).subscribe((res)=>{
-      console.log(res,"response");
-      
+    console.log(res,"loggedresponse")
+
     })
 
  }
 
-   onLogin(data : any){
+   onLogin(){
 
   this.homeService.login(this.email(),this.password()).subscribe((res)=>{
-      console.log(res,"response");
+      console.log(res,"loggedresp");
       
     })
 

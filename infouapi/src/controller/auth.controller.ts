@@ -18,7 +18,8 @@ class RES {
 
 exports.signUp = async (req: any, res: any) => {
   try {
-    const { email, mobile, password } = req.body;
+    const { email, password } = req.body;
+   const mobile = 9000090009
 
     if (!email || !mobile || !password) {
       return ({
@@ -58,8 +59,6 @@ exports.signUp = async (req: any, res: any) => {
 
   } catch (error: any) {
     console.error('Signup error:', error);
-
-    // ✅ Always send a response in catch — never return raw value
     return ({
       message: "Internal server error",
       data: error.message || null,
