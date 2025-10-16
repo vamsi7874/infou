@@ -4,9 +4,12 @@ import { ContactinfouComponent } from './components/contactinfou/contactinfou.co
 import { ServicesComponent } from './components/services/services.component';
 import { SignedupscrrenComponent } from './components/signedupscrren/signedupscrren.component';
 import { InfoAboutComponent } from './components/info-about/info-about.component';
+import { AiInteractComponent } from './ai-interact/ai-interact.component';
 
 export const routes: Routes = [
-    {path:"scheduler",component:ContactinfouComponent},{path : "services" ,component : ServicesComponent},
-    {path : "home" ,component : SignedupscrrenComponent},{path : "about" ,component : InfoAboutComponent}
-    
+  { path: 'scheduler', component: ContactinfouComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'home', component: SignedupscrrenComponent },
+  { path: 'about', component: InfoAboutComponent },
+  { path: 'chat', component: AiInteractComponent },
 ];

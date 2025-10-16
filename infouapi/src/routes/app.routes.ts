@@ -1,50 +1,47 @@
-import * as express from 'express';
-import { authenticate } from '../common/auth';
+import * as express from "express";
+import { authenticate } from "../common/auth";
 
-const Router = express.Router()
+const Router = express.Router();
 
-Router.get("/",()=>"working well on this method ");
+Router.get("/", () => "working well on this method ");
 
-const methoNameToControllerMap : any = {
-    home : "../controller/home.controller.ts",
-    weather : "../datacollection/weather.collection.api.ts",
-    auth  : "../controller/auth.controller.ts",
-    finance : "../datacollection/finance.collection.api.ts",
-    datajobs : "../data-jobs/scheduler.controller.ts",
-    logs : "../logs/logs.ts"
-}
+const methoNameToControllerMap: any = {
+  home: "../controller/home.controller.ts",
+  weather: "../datacollection/weather.collection.api.ts",
+  auth: "../controller/auth.controller.ts",
+  finance: "../datacollection/finance.collection.api.ts",
+  datajobs: "../data-jobs/scheduler.controller.ts",
+  logs: "../logs/logs.ts",
+  ai: "../controller/ai.controller.ts",
+};
 
+const commonMethodCall = async (req: any, res: any) => {
+  let methodName = req.body.methodName;
 
-const commonMethodCall = async (req : any,res : any)=>{
+  if (!methodName || methodName == "") {
+    return "Required Method Name";
+  }
+  let cntrlName = methodName.split("-")[0];
+  let method = methodName.split("-")[1];
 
-    let methodName = req.body.methodName;
+  if (!cntrlName) {
+    return "Api not supported yet;";
+  }
+  if (cntrlName && method) {
+    const CNTRL = require(methoNameToControllerMap[cntrlName]);
+    console.log(cntrlName, method, CNTRL, "jdkshjfd");
 
-    
-
-    if(!methodName || methodName == ''){
-        return "Required Method Name"
+    if (CNTRL) {
+      //calling real api from here
+      const responseData = await CNTRL[method](req);
+      return res.send(responseData);
     }
-    let cntrlName = methodName.split("-")[0];
-    let method = methodName.split("-")[1];
-
-    if(!cntrlName){
-        return "Api not supported yet;"
-    }
-    if(cntrlName && method){
-        const CNTRL = require(methoNameToControllerMap[cntrlName]);
-
-        if(CNTRL){
-            //calling real api from here
-           const responseData =  await CNTRL[method](req);
-           return res.send(responseData);
-        }
-    }
-
-}
+  }
+};
 
 //needs to implement auth middleware authenticate
-Router.post("/signup", commonMethodCall);  
-Router.post("/login", commonMethodCall);   
-Router.post("/commCall", authenticate, commonMethodCall); 
+Router.post("/signup", commonMethodCall);
+Router.post("/login", commonMethodCall);
+Router.post("/commCall", authenticate, commonMethodCall);
 
 module.exports = Router;

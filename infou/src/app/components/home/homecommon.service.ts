@@ -10,6 +10,7 @@ export class HomecommonService {
   isLoggedIn = signal(false);
   userEmail = signal<string | null>(null);
   private url = 'http://localhost:3000/app/';
+  // private url = 'https://infouapi.onrender.com/app/';
 
   constructor(private http: HttpClient, private router: Router) {
     this.checkLoginOnStartup();

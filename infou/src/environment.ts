@@ -1,8 +1,6 @@
-export const  environtment = {
-    version : "1.0.0",
+export const environtment = {
+  version: '1.0.0',
 
-    signUpUri : "http://localhost:3000",
-    path : "/"
-
-}
-
+  signUpUri: ' https://infouapi.onrender.com/app',
+  path: '/',
+};

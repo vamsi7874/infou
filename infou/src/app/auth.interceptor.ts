@@ -6,29 +6,28 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpErrorResponse
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { HomecommonService } from './components/home/homecommon.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  private readonly PUBLIC_ROUTES = ['/api/auth/login', '/api/auth/signup']; // Add your public endpoints
+  private readonly PUBLIC_ROUTES = ['/api/auth/login', '/api/auth/signup'];
 
   constructor(private auth: HomecommonService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    // Clone the request and add the Authorization header if token exists
     let authReq = req;
-
-    // Skip adding token for public routes
-    const isPublic = this.PUBLIC_ROUTES.some(route => req.url.includes(route));
+    const isPublic = this.PUBLIC_ROUTES.some((route) =>
+      req.url.includes(route)
+    );
 
     if (!isPublic) {
-      const token = this.auth.getToken(); 
+      const token = this.auth.getToken();
       if (token) {
         authReq = req.clone({
-          headers: req.headers.set('Authorization', `Bearer ${token}`)
+          headers: req.headers.set('Authorization', `Bearer ${token}`),
         });
       }
     }
