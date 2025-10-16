@@ -40,7 +40,9 @@
 
         } @if(isSignedUp){
         <li>
-          <button class="btn btn-link" (click)="homeService.logout()">Logout</button>
+          <button class="btn btn-danger" [ngbPopover]="logoutTmplt" popoverClass="">
+            Logout
+          </button>
         </li>
 
         }
@@ -49,51 +51,54 @@
   </div>
 </nav>
 
+<ng-template #logoutTmplt>
+  <span class="text-danger">Are you sure you want to logout? </span>
+  <button class="btn btn-sm btn-info" (click)="homeService.logout()">
+    Confirm
+  </button>
+</ng-template>
 
-
-@if (!isSignedUp) {
-<!-- Wrapper with margin-top -->
+@if (!isSignedUp && !showLoginScreen() && !homeService.validateToeken()) {
 <div class="mt-4 mt-lg-0">
-  <!-- Extra margin on mobile, none on large screens -->
   <div class="container-fluid min-vh-100">
     <div class="row h-100">
       <div class="d-none d-lg-block col-lg-8 bg-image">
         <img class="backimageclass" src="assets/datalogo.jpg" alt="Logo" />
       </div>
 
-      <!-- Form Section -->
       <div
         class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section"
       >
         <div
-          class="card p-4 shadow-lg  rounded-3 w-100 bg-transparent-sm"
+          class="card p-4 shadow-lg rounded-3 w-100 bg-transparent-sm"
           style="max-width: 400px"
         >
           <div class="card-body">
             <h1 class="card-title text-center fw-bold mb-4">Sign Up</h1>
-            <form (ngSubmit)="onSignup()">
+
+            <form [formGroup]="signupForm">
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label for="signupEmail" class="form-label"
+                  >Email address</label
+                >
                 <input
+                  id="signupEmail"
                   type="email"
                   class="form-control"
-                  id="email"
-                  [(ngModel)]="email"
-                  name="email"
-                  required
+                  formControlName="email"
                 />
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="signupPassword" class="form-label">Password</label>
                 <input
+                  id="signupPassword"
                   type="password"
                   class="form-control"
-                  id="password"
-                  [(ngModel)]="password"
-                  name="password"
-                  required
+                  formControlName="password"
                 />
               </div>
+
               <div class="d-grid gap-2">
                 <button
                   type="submit"
@@ -104,69 +109,60 @@
                 </button>
               </div>
             </form>
+
             <div class="d-flex justify-content-end mt-1">
-              <p class="fw-light me-1 my-3">Already have any Account Pls Login </p><button class="btn btn-sm btn-primary" (click)="check()">Login</button>
+              <p class="fw-light me-1 my-3">Already have an account?</p>
+              <button class="btn btn-sm btn-primary" (click)="check()">
+                Login
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-      
     </div>
   </div>
 </div>
-}
-
-
-
-
-
-
-
-@if(showLoginScreen()){
-
-  <div>
-  <div class="mt-4 mt-lg-0">
-  <!-- Extra margin on mobile, none on large screens -->
+} @if(showLoginScreen() && !homeService.validateToeken()) {
+<div class="mt-4 mt-lg-0">
   <div class="container-fluid min-vh-100">
     <div class="row h-100">
       <div class="d-none d-lg-block col-lg-8 bg-image">
         <img class="backimageclass" src="assets/datalogo.jpg" alt="Logo" />
       </div>
 
-      <!-- Form Section -->
       <div
         class="col-12 col-lg-4 d-flex justify-content-center align-items-center p-4 form-section"
       >
         <div
-          class="card p-4 shadow-lg  rounded-3 w-100 bg-transparent-sm"
+          class="card p-4 shadow-lg rounded-3 w-100 bg-transparent-sm"
           style="max-width: 400px"
         >
           <div class="card-body">
-            <h1 class="card-title text-center fw-bold mb-4">Log In To <b class="font-awesome">Info U</b></h1>
-            <form (ngSubmit)="onLogin()">
+            <h1 class="card-title text-center fw-bold mb-4">
+              Log In To <b class="font-awesome">Info U</b>
+            </h1>
+
+            <form [formGroup]="loginForm">
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label for="loginEmail" class="form-label">Email address</label>
                 <input
+                  id="loginEmail"
                   type="email"
                   class="form-control"
-                  id="email"
-                  [(ngModel)]="email"
-                  name="email"
-                  required
+                  formControlName="email"
                 />
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="loginPassword" class="form-label">Password</label>
                 <input
+                  id="loginPassword"
                   type="password"
                   class="form-control"
-                  id="password"
-                  [(ngModel)]="password"
-                  name="password"
-                  required
+                  formControlName="password"
                 />
               </div>
+
               <div class="d-grid gap-2">
                 <button
                   type="submit"
@@ -183,10 +179,7 @@
     </div>
   </div>
 </div>
-</div>
-
 }
-
 
 <div class="p-1 m-1">
   <router-outlet></router-outlet>

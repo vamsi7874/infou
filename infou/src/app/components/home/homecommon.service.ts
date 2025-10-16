@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomecommonService {
   isLoggedIn = signal(false);
@@ -16,29 +16,43 @@ export class HomecommonService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<any>(this.url + 'login', { email, password }).pipe(
-      tap((res) => {
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-        }
-        this.isLoggedIn.set(true);
-        this.userEmail.set(res.user?.email || email);
+    return this.http
+      .post<any>(this.url + 'login', {
+        email,
+        password,
+        methodName: 'auth-validateLogin',
       })
-    );
+      .pipe(
+        tap((res) => {
+          if (res.data.token) {
+            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('user-email', res?.data?.user?.email);
+            this.isLoggedIn.set(true);
+            this.userEmail.set(res.user?.email || email);
+            this.router.navigate(['home']);
+          }
+        })
+      );
   }
 
   signup(email: string, password: string) {
-    return this.http.post<any>(this.url + 'signup', { email, password, methodName: 'auth-signUp' }).pipe(
-      tap((res) => {
-        console.log(res,"response");
-        
-        if (res.token) {
-          localStorage.setItem('token', res.token);
-        }
-        this.isLoggedIn.set(true);
-        this.userEmail.set(res.user?.email || email);
+    return this.http
+      .post<any>(this.url + 'signup', {
+        email,
+        password,
+        methodName: 'auth-signUp',
       })
-    );
+      .pipe(
+        tap((res) => {
+          console.log(res, 'response');
+
+          if (res.token) {
+            localStorage.setItem('token', res.token);
+          }
+          this.isLoggedIn.set(true);
+          this.userEmail.set(res.user?.email || email);
+        })
+      );
   }
 
   logout() {
@@ -64,5 +78,13 @@ export class HomecommonService {
         this.logout();
       }
     }
+  }
+
+  validateToeken() {
+    let token = this.getToken();
+    if (token) {
+      return true;
+    }
+    return false;
   }
 }

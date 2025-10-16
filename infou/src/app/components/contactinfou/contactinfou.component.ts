@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError } from 'rxjs';
@@ -5,7 +6,7 @@ import { catchError } from 'rxjs';
 @Component({
   selector: 'app-contactinfou',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [HttpClientModule,DatePipe],
   templateUrl: './contactinfou.component.html',
   styleUrl: './contactinfou.component.css'
 })
