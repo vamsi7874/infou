@@ -48,6 +48,11 @@ export class HomeComponent implements OnInit {
       name: 'Home',
     },
     {
+      path: '/chat',
+      isActive: false,
+      name: 'AI Chat',
+    },
+    {
       path: '/scheduler',
       isActive: false,
       name: 'Scheduler',

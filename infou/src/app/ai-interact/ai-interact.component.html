@@ -1,14 +1,22 @@
-<div class="p-1 m-1 h-100 card">
-  <div class="h-70 bg-info border-2" [innerHtml]="data()"></div>
-  <div class="p-2 h-30 d-flex flex-row">
-    <div class="col-8">
-      <input class="form-control" [formControl]="message" />
-    </div>
+<div class="ai-container card shadow-sm rounded-4 border-0">
+  <div class="ai-content p-3 bg-light overflow-auto" [innerHTML]="data()"></div>
 
-    <div class="col ms-2">
-      <button class="btn btn-primary rounded-pill" (click)="getAiResponse()">
-        <i class="fa-solid fa-arrow-up"></i>
-      </button>
-    </div>
+  <div
+    class="ai-input d-flex flex-row align-items-center p-3 border-top bg-white"
+  >
+    <input
+      class="form-control flex-grow-1 rounded-pill px-3"
+      placeholder="Type your message..."
+      [formControl]="message"
+      (keyup.enter)="getAiResponse()"
+    />
+
+    <button
+      class="btn btn-primary rounded-circle ms-3 d-flex justify-content-center align-items-center"
+      (click)="getAiResponse()"
+      style="width: 48px; height: 48px"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
   </div>
 </div>

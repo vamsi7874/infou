@@ -1,6 +1,7 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { environtment } from '../../environment';
 
 @Component({
   selector: 'app-weather',
@@ -23,7 +24,7 @@ export class WeatherComponent {
     let payload = {
       methodName: 'weather-getWeatherData',
     };
-    let url = 'http://localhost:3000/app/commCall';
+    const url = `${environtment.baseUrl}/commCall`;
 
     this.http.post(url, payload).subscribe((data: any) => {
       this.weatherData = data;

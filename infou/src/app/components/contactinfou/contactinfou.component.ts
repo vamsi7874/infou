@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError } from 'rxjs';
+import { environtment } from '../../../environment';
 
 @Component({
   selector: 'app-contactinfou',
@@ -44,7 +45,7 @@ export class ContactinfouComponent implements OnInit {
   }
 
   onClickScheduler(key: string | undefined) {
-    const uri = 'http://localhost:3000/app/commCall';
+    const uri = `${environtment.baseUrl}/commCall`;
     // const uri = 'https://infouapi.onrender.com/app/commCall';
     const payload = {
       key: key,
@@ -57,7 +58,7 @@ export class ContactinfouComponent implements OnInit {
   }
 
   getCronLogs() {
-    const uri = 'http://localhost:3000/app/commCall';
+    const uri = `${environtment.baseUrl}/commCall`;
     // const uri = 'https://infouapi.onrender.com/app/commCall';
     const payload = {
       methodName: 'logs-getLogsData',

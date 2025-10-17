@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
+import { environtment } from '../../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { tap } from 'rxjs';
 export class HomecommonService {
   isLoggedIn = signal(false);
   userEmail = signal<string | null>(null);
-  private url = 'http://localhost:3000/app/';
+  private url = `${environtment.baseUrl}/`;
   // private url = 'https://infouapi.onrender.com/app/';
 
   constructor(private http: HttpClient, private router: Router) {

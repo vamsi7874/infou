@@ -3,7 +3,8 @@ import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 const geminiGpt = new ChatGoogleGenerativeAI({
   model: "gemini-2.0-flash",
-  temperature: 0,
+  temperature: 1.0,
+  apiKey: process.env.GOOGLE_API_KEY,
 });
 
 const baseMessages = [

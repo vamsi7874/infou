@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #98d0d7 0%, #e8f0ff 50%, #f8faff 100%);
+  background-attachment: fixed;
+  color: #212529;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+* {
+  scroll-behavior: smooth;
+}
