@@ -20,7 +20,9 @@ const connection_string = process.env.MONGO_STRING_CONNECTION;
 const dbName = process.env.DB;
 
 app.get("/", (req, res) => {
-  res.send({ code: 300 });
+  //render will take 60 sec to restart in free deployment plan.so for to add a check in front end whether is server is up or not
+  //added this pretty good check :::::hitting empty server on downtime.
+  res.send({ code: 200 });
 });
 
 app.use("/app", appRoutes);

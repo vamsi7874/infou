@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   startCountdown() {
     this.intervalId = setInterval(() => {
-      if (this.waitingTime() <= this.maxWaittime) {
+      if (this.waitingTime() < this.maxWaittime) {
         this.waitingTime.update((t) => t + 1);
       } else {
         clearInterval(this.intervalId);
