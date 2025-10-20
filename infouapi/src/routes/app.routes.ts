@@ -13,6 +13,7 @@ const methoNameToControllerMap: any = {
   datajobs: "../data-jobs/scheduler.controller.ts",
   logs: "../logs/logs.ts",
   ai: "../controller/ai.controller.ts",
+  news: "../controller/news.controller.ts",
 };
 
 const commonMethodCall = async (req: any, res: any) => {
