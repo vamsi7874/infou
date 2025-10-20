@@ -3,15 +3,24 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HomecommonService } from './components/home/homecommon.service';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), HomecommonService,
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    HomecommonService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
     },
-    provideHttpClient(withInterceptorsFromDi()) ]
+    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(),
+  ],
 };

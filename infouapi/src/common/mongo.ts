@@ -48,15 +48,21 @@ export const findOne = async (
 
 export const findAll = async (
   collectionName: string,
-  key: string,
-  value: string
+  filters: Record<string, any>[] = []
 ): Promise<any[]> => {
   try {
     const db = await getDb();
-    return await db
+    const formedFilters = filters.reduce(
+      (acc, curr) => ({ ...acc, ...curr }),
+      {}
+    );
+    console.log(formedFilters, "filterss");
+    const results = await db
       .collection(collectionName)
-      .find({ key: value }, { projection: { _id: 0 } })
+      .find(formedFilters, { projection: { _id: 0 } })
       .toArray();
+
+    return results;
   } catch (err) {
     console.error(`Error finding all documents in '${collectionName}':`, err);
     return [];

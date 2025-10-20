@@ -51,7 +51,38 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row col-12">
     <app-weather></app-weather>
+  </div>
+  <hr />
+  <div class="row col-12">
+    <!-- <app-newsscroll></app-newsscroll> -->
+
+    <ngb-carousel
+      #carousel
+      [interval]="1000"
+      [pauseOnHover]="pauseOnHover"
+      [pauseOnFocus]="pauseOnFocus"
+      (slide)="onSlide($event)"
+    >
+      @for (newItem of preparedData(); track newItem; let i = $index) {
+      <ng-template ngbSlide>
+        <div class="carousel-caption">
+          <h3>{{ newItem.title }}</h3>
+        </div>
+        <a
+          href="https://www.google.fr/?q=Number+{{ i + 1 }}"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          <div class="picsum-img-wrapper">
+            <img [src]="newItem.image" alt="My image {{ i + 1 }} description" />
+          </div>
+        </a>
+      </ng-template>
+      }
+    </ngb-carousel>
+
+    <hr />
   </div>
 </div>

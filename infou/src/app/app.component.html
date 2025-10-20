@@ -1,1 +1,17 @@
+@if(isServerUp()){
 <app-home></app-home>
+
+}@else{
+
+<!--render check -->
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="text-center mt-5">
+    <span
+      >Server is Being restarted.Pls Wait ,We will Navigate in
+      {{ this.waitingTime() }} 'sec...</span
+    >
+
+    <ngb-progressbar class="mb-3" [value]="waitingTime()" />
+  </div>
+</div>
+}
