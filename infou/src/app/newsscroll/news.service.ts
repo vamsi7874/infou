@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NewsService {
   private http = inject(HttpClient);
-  newsData = signal<any[]>([]);
+  newsData = signal<any>(null);
 
   constructor() {}
 
@@ -19,6 +19,7 @@ export class NewsService {
 
     this.http.post(url, body).subscribe((res: any) => {
       this.newsData.set(res['data']);
+      console.log(this.newsData(), 'newsData');
     });
   }
 }

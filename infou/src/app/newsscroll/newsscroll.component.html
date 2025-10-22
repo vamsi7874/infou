@@ -1,3 +1,68 @@
-<div class="h-30 w-100">
-  <p>New Scrollables here</p>
+<div class="h-30 w-100 text-center">
+  Hey There!, We are Collecting this data from Global Sources.
 </div>
+
+@if(topics() && newsData()) {
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    @for (topic of topics(); track topic) {
+    <div class="col-12">
+      <h4 class="text-dark-emphasis mb-3 badge">
+        {{ topic | titlecase }} News
+      </h4>
+    </div>
+
+    @for (news of getTopicsData(topic); track news.url) {
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="card h-100 shadow-sm border-0 rounded-3">
+        @if(news.urlToImage) {
+        <img
+          class="card-img-top rounded-top"
+          [src]="news.urlToImage"
+          [alt]="news.title || 'News image'"
+          style="height: 200px; object-fit: cover"
+        />
+        }
+        <div class="card-body bg-dark text-light">
+          <h5 class="card-title">{{ news.title }}</h5>
+          <p
+            class="card-text text-secondary"
+            [innerHtml]="news.description"
+          ></p>
+          <a
+            class="btn btn-outline-info btn-sm"
+            [href]="news.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Read More</a
+          >
+        </div>
+      </div>
+    </div>
+    } }
+  </div>
+</div>
+} @else {
+<!-- Better skeleton layout -->
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    @for (i of [1,2,3,4,5,6]; track i) {
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="card h-100 border-0">
+        <ngx-skeleton-loader
+          appearance="circle"
+          [theme]="{ 'height.px': 200, 'width.px': '100%' }"
+        ></ngx-skeleton-loader>
+        <div class="card-body">
+          <ngx-skeleton-loader
+            count="2"
+            [theme]="{ 'height.px': 20, 'margin-bottom.px': 10 }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="3"></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+}

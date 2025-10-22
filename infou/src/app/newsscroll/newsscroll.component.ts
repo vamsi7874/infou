@@ -1,8 +1,8 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { environtment } from '../../environment';
+import { Component, computed, inject } from '@angular/core';
 import { NewsService } from './news.service';
-import { single } from 'rxjs';
+import { TitleCasePipe } from '@angular/common';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { HttpClientModule } from '@angular/common/http'; // Only if not provided globally
 
 export type NewsItem = {
   image: string;
@@ -13,18 +13,22 @@ export type NewsItem = {
 @Component({
   selector: 'app-newsscroll',
   standalone: true,
-  imports: [],
+  imports: [TitleCasePipe, NgxSkeletonLoaderModule],
   providers: [NewsService],
   templateUrl: './newsscroll.component.html',
   styleUrl: './newsscroll.component.css',
 })
-export class NewsscrollComponent implements OnInit {
+export class NewsscrollComponent {
   private newService = inject(NewsService);
   newsData = this.newService.newsData;
 
-  constructor() {}
+  topics = computed(() => this.newsData() && Object.keys(this.newsData()));
 
-  ngOnInit(): void {
+  constructor() {
     this.newService.getNews();
+  }
+
+  getTopicsData(topic: string): any[] {
+    return this.newsData()?.[topic]?.articles?.slice(1, 11) || [];
   }
 }

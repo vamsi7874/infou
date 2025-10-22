@@ -69,20 +69,20 @@ export class SignedupscrrenComponent implements OnInit {
     this.newService.getNews();
   }
 
-  preparedDataSlides(data: any) {
-    let preparedArray: NewsItem[] = [];
-    let keys = ['ai', 'gold', 'stocks', 'india'];
-    if (data) {
-      keys.forEach((ele: any) => {
-        let obj: any = {};
-        obj['desc'] = data[ele][0]['articles'][0]?.description;
-        obj['title'] = data[ele][0]['articles'][0]?.title;
-        obj['image'] = data[ele][0]['articles'][0]?.urlToImage;
-        preparedArray.push(obj);
-      });
-    }
+  preparedDataSlides(data: Record<string, any>): NewsItem[] {
+    const keys = ['ai', 'gold', 'stocks', 'india'];
 
-    return preparedArray;
+    return keys
+      .map((key) => {
+        const article = data[key]?.[0]?.articles?.[0];
+        if (!article) return null;
+        return {
+          desc: article.description,
+          title: article.title,
+          image: article.urlToImage,
+        };
+      })
+      .filter((item): item is NewsItem => !!item);
   }
 
   togglePaused() {

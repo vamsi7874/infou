@@ -1,5 +1,5 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
@@ -8,6 +8,7 @@ import {
   NgbProgressbarConfig,
   NgbProgressbarModule,
 } from '@ng-bootstrap/ng-bootstrap';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +28,12 @@ export class AppComponent implements OnInit {
   isServerUp = signal(false);
   private http = inject(HttpClient);
   intervalId: any;
+  private route = inject(Router);
 
-  constructor(private config: NgbProgressbarConfig) {
+  constructor(
+    private config: NgbProgressbarConfig,
+    private titleService: Title
+  ) {
     config.max = this.maxWaittime;
     config.striped = true;
     config.animated = true;
@@ -38,26 +43,39 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDownTime();
+    this.setTitle('infoU');
+  }
+
+  setTitle(name: string) {
+    this.titleService.setTitle(name?.toUpperCase());
   }
 
   startCountdown() {
     this.intervalId = setInterval(() => {
       if (this.waitingTime() < this.maxWaittime) {
         this.waitingTime.update((t) => t + 1);
-      } else {
-        clearInterval(this.intervalId);
       }
     }, 1000);
   }
 
   checkDownTime() {
+    this.startCountdown();
     this.http
       .get(environtment.baseUrl.replace('app', ''))
       .subscribe((res: any) => {
-        if (res?.code == 200) {
-          this.isServerUp.set(false);
+        console.log(res, 'response');
+
+        if (res.code === 200) {
+          this.isServerUp.set(true);
+          clearInterval(this.intervalId);
+          this.checkSession();
         }
-        this.startCountdown();
       });
+  }
+
+  checkSession() {
+    if (localStorage.getItem('token')) {
+      this.route.navigate(['home']);
+    }
   }
 }

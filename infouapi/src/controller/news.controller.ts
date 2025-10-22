@@ -62,7 +62,7 @@ export const fetchNewsDataToday = async (req: any, res: any) => {
 
     responses.forEach((response: any, index: any) => {
       const topic = topics[index];
-      topicWiseData[topic] = response || [];
+      topicWiseData[topic] = response[0] || [];
     });
 
     return {

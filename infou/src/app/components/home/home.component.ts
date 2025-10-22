@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
     {
       path: '/services',
       isActive: false,
-      name: 'Services',
+      name: 'Explore/Trends',
     },
   ]);
 
