@@ -74,7 +74,7 @@ export class SignedupscrrenComponent implements OnInit {
 
     return keys
       .map((key) => {
-        const article = data[key]?.[0]?.articles?.[0];
+        const article = data[key]?.articles[0];
         if (!article) return null;
         return {
           desc: article.description,
