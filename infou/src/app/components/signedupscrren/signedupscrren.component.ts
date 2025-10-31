@@ -71,6 +71,7 @@ export class SignedupscrrenComponent implements OnInit {
 
   preparedDataSlides(data: Record<string, any>): NewsItem[] {
     const keys = ['ai', 'gold', 'stocks', 'india'];
+    console.log(data, 'dataCom');
 
     return keys
       .map((key) => {
